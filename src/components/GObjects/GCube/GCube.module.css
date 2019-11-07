@@ -1,0 +1,43 @@
+.GCube {
+    width: inherit;
+    height: inherit;
+    transform-style: preserve-3d;
+}
+
+.side {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border: 1px solid #FFF;
+    font: 400 50px Arial;
+    display: grid;
+    align-items: center;
+    text-align: center;
+    color: #FFFF;
+    user-select: none
+}
+
+.front {
+    transform: translateZ(100px)
+}
+
+.back {
+    transform: rotateY(180deg) translateZ(100px)
+}
+
+.right {
+    transform: rotateY(90deg) translateZ(100px)
+}
+
+.left {
+    transform: rotateY(-90deg) translateZ(100px)
+}
+
+.top {
+    transform: rotateX(90deg) translateZ(100px)
+}
+
+.bottom {
+    transform: rotateX(-90deg) translateZ(100px)
+}
+

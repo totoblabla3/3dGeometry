@@ -1,0 +1,61 @@
+.animation {
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+.front {
+    animation-name: front;
+}
+
+.right {
+    animation-name: right;
+}
+
+.left {
+    animation-name: left;
+}
+
+.bottom {
+    animation-name: bottom;
+}
+
+@keyframes front {
+    0% {
+        transform: translateZ(58px) rotateX(20deg)
+    }
+
+    100% {
+        transform: translateZ(158px) rotateX(20deg)
+    }
+}
+
+@keyframes right {
+    0% {
+        transform: translateZ(-30px) translateX(51px) rotateY(120deg) rotateX(19.5deg)
+    }
+
+    100% {
+        transform: translateZ(-90px) translateX(151px) rotateY(120deg) rotateX(19.5deg)
+    }
+}
+
+@keyframes left {
+    0% {
+        transform: translateZ(-30px) translateX(-51px) rotateY(-120deg) rotateX(19.5deg)
+    }
+
+    100% {
+        transform: translateZ(-90px) translateX(-151px) rotateY(-120deg) rotateX(19.5deg)
+    }
+}
+
+@keyframes bottom {
+    0% {
+        transform: rotateX(90deg) rotateY(180deg) translateY(58px)
+    }
+
+    100% {
+        transform: rotateX(90deg) rotateY(180deg) translateY(58px) translateZ(100px)
+    }
+}

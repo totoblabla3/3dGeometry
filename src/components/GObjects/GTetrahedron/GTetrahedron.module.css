@@ -1,0 +1,57 @@
+.GTetrahedron{
+    width: inherit;
+    height: inherit;
+    transform-style: preserve-3d;
+    transform-origin: center 70%;
+}
+.side{
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    border-bottom: 1px solid #FFF;
+    background-color: rgb(105, 105, 105);
+    font: 400 30px Arial;
+    display: grid;
+    align-items: end;
+    text-align: center;
+    color: #FFFF;
+    user-select: none;
+    /* backface-visibility: hidden; */
+    clip-path: polygon(50% 12%, 105% 105%, -5% 105%);
+}
+.side:after{
+    width: inherit;
+    height: inherit;
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid #FFF;
+    transform-origin: right bottom;
+    transform: rotate(60deg);
+    right: 0.3px;
+}
+.side:before{
+    width: inherit;
+    height: inherit;
+    content: '';
+    position: absolute;
+    border-bottom: 1px solid #FFF;
+    transform-origin: left bottom;
+    transform: rotate(-60deg);
+}
+.front{
+    transform-origin: center bottom;
+    transform: translateZ(58px) rotateX(20deg) 
+}
+.right{
+    transform-origin: center bottom;
+    transform:  translateZ(-30px) translateX(51px) rotateY(120deg) rotateX(19.5deg) 
+}
+.left{
+    transform-origin: center bottom;
+    transform:  translateZ(-30px) translateX(-51px) rotateY(-120deg) rotateX(19.5deg) 
+}
+.bottom{
+    transform-origin: center bottom;
+    transform: rotateX(90deg) rotateY(180deg) translateY(58px)
+}
+
