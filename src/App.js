@@ -25,19 +25,19 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    window.onmousemove = this._mouveCube
-    window.onmousedown = this._onKeyDown
-    window.onmouseup = this._onKeyUp
+    window.onmousemove = this.moveCube
+    window.onmousedown = this.onKeyDown
+    window.onmouseup = this.onKeyUp
   }
 
-  _onKeyDown = () => {
+  onKeyDown = () => {
     if (!this.state.key) this.setState({ key: true })
   }
-  _onKeyUp = () => {
+  onKeyUp = () => {
     if (this.state.key) this.setState({ key: false })
   }
 
-  _mouveCube = (e) => {
+  moveCube = (e) => {
     const { key, pageX, pageY, lastX, lastY } = this.state
     if (key) {
       this.setState({
@@ -68,7 +68,7 @@ export default class App extends Component {
     })
   }
 
-  _onModelSelected(id) {
+  onModelSelected(id) {
     this.setState({
       models: this.state.models.map((item, i) => {
         return {
@@ -80,7 +80,7 @@ export default class App extends Component {
     })
   }
 
-  _onAnimateButtonPress() {
+  onAnimateButtonPress() {
     this.setState({ animation: !this.state.animation })
   }
 
@@ -95,10 +95,10 @@ export default class App extends Component {
       <SwipeHandlerWrapper onSwiping={(e) => this.onSwiping(e)}>
         <div className="App">
           <UMenu
-            onAnimateButtonPress={() => this._onAnimateButtonPress()}
+            onAnimateButtonPress={() => this.onAnimateButtonPress()}
             animation={animation}
             models={this.state.models}
-            onSelected={(id) => this._onModelSelected(id)}
+            onSelected={(id) => this.onModelSelected(id)}
           />
           <div className="container">
             {models[0].display &&
