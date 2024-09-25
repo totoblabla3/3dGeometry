@@ -41,10 +41,10 @@ export default class App extends Component {
       this.setState({
         pageX: lastX === e.pageX ?
           (pageX) : (lastX > e.pageX ?
-            (pageX - 2) : (pageX + 2)),
+            (pageX - 2.5) : (pageX + 2.5)),
         pageY: lastY === e.pageY ?
           (pageY) : (lastY > e.pageY ?
-            (pageY + 2) : (pageY - 2)),
+            (pageY + 2.5) : (pageY - 2.5)),
         lastX: e.pageX,
         lastY: e.pageY,
       })
