@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { GCube, GTetrahedron } from './components/GObjects'
 import { UMenu } from './components/uiKit'
+import { useSwipeable } from 'react-swipeable';
+
 export default class App extends Component {
   state = {
     key: false,
@@ -51,6 +53,21 @@ export default class App extends Component {
     }
   }
 
+  onSwiping(e){
+    const { pageX, pageY, lastX, lastY } = this.state
+
+    this.setState({
+      pageX: lastX === e.deltaX ?
+        (pageX) : (lastX > e.deltaX ?
+          (pageX - 2.5) : (pageX + 2.5)),
+      pageY: lastY === e.deltaY ?
+        (pageY) : (lastY > e.deltaY ?
+          (pageY + 2.5) : (pageY - 2.5)),
+      lastX: e.deltaX,
+      lastY: e.deltaY,
+    })
+  }
+
   _onModelSelected(id) {
     this.setState({
       models: this.state.models.map((item, i) => {
@@ -75,30 +92,47 @@ export default class App extends Component {
       animation
     } = this.state
     return (
-      <div className="App">
-        <UMenu
-          onAnimateButtonPress={() => this._onAnimateButtonPress()}
-          animation={animation}
-          models={this.state.models}
-          onSelected={(id) => this._onModelSelected(id)}
-        />
-        <div className="container">
-          {models[0].display &&
-            <GCube
-              pageX={pageX}
-              pageY={pageY}
-              animation={animation}
-            />
-          }
-          {models[1].display &&
-            <GTetrahedron
-              pageX={pageX}
-              pageY={pageY}
-              animation={animation}
-            />
-          }
+      <SwipeHandlerWrapper onSwiping={(e) => this.onSwiping(e)}>
+        <div className="App">
+          <UMenu
+            onAnimateButtonPress={() => this._onAnimateButtonPress()}
+            animation={animation}
+            models={this.state.models}
+            onSelected={(id) => this._onModelSelected(id)}
+          />
+          <div className="container">
+            {models[0].display &&
+              <GCube
+                pageX={pageX}
+                pageY={pageY}
+                animation={animation}
+              />
+            }
+            {models[1].display &&
+              <GTetrahedron
+                pageX={pageX}
+                pageY={pageY}
+                animation={animation}
+              />
+            }
+          </div>
         </div>
-      </div>
+      </SwipeHandlerWrapper>
     )
   }
+}
+
+const SwipeHandlerWrapper = ({ 
+  children, 
+  onTouchStart = () => null, 
+  onTouchEnd = () => null, 
+  onSwiping = () => null 
+}) => {
+  const handlers = useSwipeable({
+    onTouchStartOrOnMouseDown: ({ event }) => onTouchStart(event),
+    onTouchEndOrOnMouseUp: ({ event }) => onTouchEnd(event),
+    onSwiping: (event) => onSwiping(event),
+  });
+
+  return <div {...handlers} className="wrapper">{children}</div>
 }
